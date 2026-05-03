@@ -1,0 +1,19 @@
+name: Delete package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  delete-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete GHCR package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -X DELETE             -H 'Accept: application/vnd.github+json'             "/users/Ciward/packages/container/sub2api-tokenlab-task6-cairn-4kazj"
